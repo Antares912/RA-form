@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>استمارة مقارنة النسب — مساعد باحث</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F5F0;
+    --surface: #FFFFFF;
+    --surface2: #F0EDE6;
+    --border: #DDD9D0;
+    --border-focus: #2C5F2E;
+    --accent: #2C5F2E;
+    --accent-light: #EAF2EA;
+    --accent2: #C8A84B;
+    --text: #1A1A1A;
+    --text-muted: #6B6560;
+    --text-light: #9B9590;
+    --danger: #C0392B;
+    --danger-light: #FDF2F2;
+    --success: #2C5F2E;
+    --success-light: #EAF2EA;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Cairo', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    direction: rtl;
+  }
+
+  /* Header */
+  .page-header {
+    background: var(--accent);
+    padding: 2rem 1.5rem 1.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: -40px; left: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .page-header::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; right: -20px;
+    width: 160px; height: 160px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .header-badge {
+    display: inline-block;
+    background: rgba(200,168,75,0.2);
+    color: var(--accent2);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(200,168,75,0.3);
+    margin-bottom: 10px;
+  }
+  .page-header h1 {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+    position: relative;
+    z-index: 1;
+  }
+  .page-header p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    position: relative;
+    z-index: 1;
+  }
+  .anon-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.85);
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-top: 10px;
+  }
+  .anon-dot {
+    width: 6px; height: 6px;
+    background: #7EC880;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* Layout */
+  .page-body {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  /* Progress */
+  .progress-bar {
+    height: 3px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+
+  /* Section cards */
+  .section-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--shadow);
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.1rem;
+  }
+  .section-num {
+    width: 26px; height: 26px;
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  /* Form elements */
+  .field-group { margin-bottom: 1rem; }
+  .field-group:last-child { margin-bottom: 0; }
+
+  label.field-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .optional-tag {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--text-light);
+    background: var(--surface2);
+    padding: 1px 7px;
+    border-radius: 10px;
+    margin-right: 6px;
+  }
+
+  select, input[type="number"], input[type="text"] {
+    width: 100%;
+    padding: 10px 12px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    color: var(--text);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    outline: none;
+    transition: border-color 0.2s;
+    direction: rtl;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6560' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 12px center;
+    padding-left: 32px;
+  }
+  select:focus, input:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px rgba(44,95,46,0.1);
+  }
+
+  /* Checkboxes */
+  .checkbox-grid {
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    max-height: 220px;
+    overflow-y: auto;
+    background: var(--surface);
+  }
+  .checkbox-grid::-webkit-scrollbar { width: 6px; }
+  .checkbox-grid::-webkit-scrollbar-track { background: var(--surface2); }
+  .checkbox-grid::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 12px;
+    cursor: pointer;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+    font-size: 14px;
+    color: var(--text);
+    font-weight: 400;
+  }
+  .checkbox-item:last-child { border-bottom: none; }
+  .checkbox-item:hover { background: var(--accent-light); }
+  .checkbox-item input[type="checkbox"] {
+    width: 16px; height: 16px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .checkbox-item.checked {
+    background: var(--accent-light);
+  }
+  .spec-code {
+    font-size: 11px;
+    color: var(--text-light);
+    margin-right: auto;
+    font-family: monospace;
+  }
+
+  .count-badge {
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-top: 6px;
+  }
+
+  /* Two columns */
+  .row2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 1rem 0;
+  }
+
+  /* Hidden */
+  .hidden { display: none !important; }
+
+  /* Submit */
+  .submit-wrap { margin-top: 1.25rem; }
+  .submit-btn {
+    width: 100%;
+    padding: 13px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--accent);
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .submit-btn:hover { opacity: 0.9; }
+  .submit-btn:active { transform: scale(0.99); }
+  .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .submit-btn .spinner {
+    width: 16px; height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* Error */
+  .error-box {
+    background: var(--danger-light);
+    border: 1px solid rgba(192,57,43,0.2);
+    border-radius: var(--radius-sm);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--danger);
+    margin-top: 0.75rem;
+  }
+
+  /* Success screen */
+  .success-screen {
+    text-align: center;
+    padding: 3rem 1.5rem;
+  }
+  .success-icon {
+    width: 64px; height: 64px;
+    background: var(--success-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.25rem;
+    font-size: 28px;
+  }
+  .success-screen h2 {
+    font-family: 'Tajawal', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--success);
+    margin-bottom: 8px;
+  }
+  .success-screen p {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .submit-another {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 10px 24px;
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    border-radius: var(--radius-sm);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    background: none;
+    transition: background 0.15s;
+  }
+  .submit-another:hover { background: var(--accent-light); }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .row2 { grid-template-columns: 1fr; }
+    .page-header h1 { font-size: 18px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-badge">مجلس المراكز والمعاهد والهيئات البحثية</div>
+  <h1>استمارة مقارنة النسب</h1>
+  <p>مساعد باحث — النوع الثاني</p>
+  <div class="anon-note">
+    <span class="anon-dot"></span>
+    نموذج مجهول — لا تُجمع أي بيانات شخصية
+  </div>
+</header>
+
+<div class="page-body">
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+  <div id="form-view">
+
+    <!-- Section 1: Field & Speciality -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">١</div>
+        <div class="section-title">الكلية والتخصص</div>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label" for="field-select">الكلية / المجموعة</label>
+        <select id="field-select">
+          <option value="">— اختر الكلية —</option>
+        </select>
+      </div>
+
+      <div class="field-group hidden" id="spec-group">
+        <label class="field-label">التخصص</label>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">يمكن اختيار أكثر من تخصص إذا تقدمت لأكثر من واحد</p>
+        <div class="checkbox-grid" id="spec-checkboxes"></div>
+        <div class="count-badge hidden" id="spec-count"></div>
+      </div>
+    </div>
+
+    <!-- Section 2: Centre -->
+    <div class="section-card hidden" id="centre-card">
+      <div class="section-header">
+        <div class="section-num">٢</div>
+        <div class="section-title">المركز البحثي</div>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="centre-select">المركز / الجهة التي تقدمت لها</label>
+        <p style="font-size:12px; color:var(--text-muted); margin-bottom:8px;">تظهر فقط المراكز التي لديها شواغر في تخصصاتك المختارة</p>
+        <select id="centre-select">
+          <option value="">— اختر المركز —</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Section 3: Scores -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">٣</div>
+        <div class="section-title">النسبة المئوية</div>
+      </div>
+      <div class="field-group">
+        <label class="field-label" for="overall-pct">النسبة المئوية الإجمالية للمجموع الكلي</label>
+        <input type="number" id="overall-pct" min="0" max="100" step="0.01" placeholder="مثال: 87.45">
+      </div>
+    </div>
+
+    <!-- Section 4: English (optional) -->
+    <div class="section-card">
+      <div class="section-header">
+        <div class="section-num">٤</div>
+        <div class="section-title">شهادة اللغة الإنجليزية <span class="optional-tag">اختياري</span></div>
+      </div>
+      <div class="row2">
+        <div class="field-group">
+          <label class="field-label" for="eng-type">نوع الشهادة</label>
+          <select id="eng-type">
+            <option value="">— اختر —</option>
+            <option value="IELTS Academic">IELTS Academic</option>
+            <option value="TOEFL iBT">TOEFL iBT</option>
+            <option value="TOEFL ITP">TOEFL ITP</option>
+            <option value="TOEIC">TOEIC</option>
+          </select>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="eng-score">الدرجة</label>
+          <input type="number" id="eng-score" step="0.5" placeholder="مثال: 6.5">
+        </div>
+      </div>
+    </div>
+
+    <div id="error-box" class="error-box hidden"></div>
+
+    <div class="submit-wrap">
+      <button class="submit-btn" id="submit-btn" onclick="submitForm()">
+        <span id="btn-text">إرسال الاستمارة</span>
+      </button>
+    </div>
+
+  </div><!-- /form-view -->
+
+  <!-- Success screen -->
+  <div id="success-view" class="success-screen hidden">
+    <div class="success-icon">✓</div>
+    <h2>تم الإرسال بنجاح</h2>
+    <p>شكراً لمساهمتك.<br>سيتم إضافة بياناتك إلى جدول المقارنة.</p>
+    <button class="submit-another" onclick="resetForm()">إرسال استمارة أخرى</button>
+  </div>
+
+</div><!-- /page-body -->
+
+<script>
+// =========================================================
+// CONFIG — replace with your deployed Apps Script URL
+// =========================================================
+const SCRIPT_URL = https://script.google.com/macros/s/AKfycbwO6jUB_mfLnMuuJKABWy_Ll33ddG6Fwi-Zx6ik4_hv_6Cu2qFxl_MIrfuIEEDErkHPKw/exec;
+
+// =========================================================
+// DATA
+// =========================================================
+const CENTRES = [
+  "المركز القومي للبحوث",
+  "مركز بحوث وتطوير الفلزات",
+  "المعهد القومي للمعايرة",
+  "المعهد القومي لعلوم البحار والمصايد",
+  "معهد بحوث البترول",
+  "معهد بحوث أمراض العيون",
+  "الهيئة القومية للاستشعار من البعد وعلوم الفضاء",
+  "مدينة الأبحاث العلمية والتطبيقات التكنولوجية",
+  "معهد تيودور بلهارس للأبحاث",
+  "المعهد القومي للبحوث الفلكية والجيوفيزيقية",
+  "معهد بحوث الإلكترونيات"
+];
+
+const C = {NRC:0,METALS:1,NIS:2,NMRI:3,PRI:4,ERI:5,NARSS:6,CITY:7,TBRI:8,NRIAG:9,ERI2:10};
+
+const SPECS = [
+  {id:1,field:"علوم",name:"تكنولوجيا حيوية / بيوتكنولوجي",centres:[C.NRC,C.CITY,C.NARSS]},
+  {id:2,field:"علوم",name:"نبات كيمياء",centres:[C.NRC]},
+  {id:3,field:"علوم",name:"علوم الأرض - جيولوجيا هندسية",centres:[C.NRC]},
+  {id:4,field:"علوم",name:"علوم البحار",centres:[C.NRC,C.NMRI]},
+  {id:5,field:"علوم",name:"إحصاء بيئي",centres:[C.NRC]},
+  {id:6,field:"علوم",name:"بيولوجي",centres:[C.NRC,C.CITY,C.TBRI,C.NARSS]},
+  {id:7,field:"علوم",name:"بيئية",centres:[C.NRC,C.NARSS]},
+  {id:8,field:"علوم",name:"تكنولوجيا حيوية جزيئية",centres:[C.NRC]},
+  {id:9,field:"علوم",name:"ثروة سمكية ومصايد بحرية",centres:[C.NRC]},
+  {id:10,field:"علوم",name:"جيوفيزياء",centres:[C.NRC,C.PRI,C.NMRI,C.NARSS,C.NRIAG,C.ERI2]},
+  {id:11,field:"علوم",name:"جيولوجيا",centres:[C.NRC,C.METALS,C.PRI,C.NMRI,C.NARSS,C.NRIAG,C.ERI2]},
+  {id:12,field:"علوم",name:"جيولوجيا - كيمياء",centres:[C.NRC,C.PRI]},
+  {id:13,field:"علوم",name:"جيولوجيا مائية (ذكور فقط)",centres:[C.NARSS]},
+  {id:14,field:"علوم",name:"حاسب",centres:[C.NRC,C.NARSS]},
+  {id:15,field:"علوم",name:"حشرات",centres:[C.NRC,C.CITY]},
+  {id:16,field:"علوم",name:"حيوان",centres:[C.NRC,C.TBRI]},
+  {id:17,field:"علوم",name:"حيوان - كيمياء",centres:[C.NRC,C.TBRI]},
+  {id:18,field:"علوم",name:"رياضيات",centres:[C.NRC]},
+  {id:19,field:"علوم",name:"طفيليات",centres:[C.CITY]},
+  {id:20,field:"علوم",name:"فسيولوجي",centres:[C.CITY]},
+  {id:21,field:"علوم",name:"فلك",centres:[C.NRIAG]},
+  {id:22,field:"علوم",name:"فيزياء",centres:[C.NRC,C.METALS,C.PRI,C.NARSS,C.NRIAG,C.ERI2,C.ERI]},
+  {id:23,field:"علوم",name:"فيزياء - فلك",centres:[C.NRIAG]},
+  {id:24,field:"علوم",name:"فيزياء - كيمياء",centres:[C.NRC]},
+  {id:25,field:"علوم",name:"فيزياء حيوي",centres:[C.NRC,C.TBRI]},
+  {id:26,field:"علوم",name:"كيمياء",centres:[C.NRC,C.METALS,C.NIS,C.NMRI,C.PRI,C.NARSS,C.CITY,C.ERI2,C.ERI]},
+  {id:27,field:"علوم",name:"كيمياء تطبيقية",centres:[C.NRC]},
+  {id:28,field:"علوم",name:"كيمياء حيوية",centres:[C.NRC,C.CITY]},
+  {id:29,field:"علوم",name:"كيمياء حيوية - كيمياء",centres:[C.NRC]},
+  {id:30,field:"علوم",name:"ميكروبيولوجي",centres:[C.NRC,C.NIS,C.NMRI,C.CITY,C.NARSS]},
+  {id:31,field:"علوم",name:"ميكروبيولوجي - كيمياء",centres:[C.NRC]},
+  {id:32,field:"علوم",name:"نانوتكنولوجي",centres:[C.CITY]},
+  {id:33,field:"علوم",name:"نبات - ميكروبيولوجي",centres:[C.CITY]},
+  {id:34,field:"هندسة",name:"اتصالات",centres:[C.NRC,C.ERI2]},
+  {id:35,field:"هندسة",name:"اتصالات والكترونيات",centres:[C.ERI2]},
+  {id:36,field:"هندسة",name:"الكترونيات",centres:[C.NRC,C.CITY]},
+  {id:37,field:"هندسة",name:"بحرية",centres:[C.NMRI]},
+  {id:38,field:"هندسة",name:"تعدين",centres:[C.NRC,C.METALS]},
+  {id:39,field:"هندسة",name:"حاسبات",centres:[C.NRC,C.CITY,C.ERI2]},
+  {id:40,field:"هندسة",name:"صناعية",centres:[C.NRC,C.NIS]},
+  {id:41,field:"هندسة",name:"طبية",centres:[C.NRC,C.NIS]},
+  {id:42,field:"هندسة",name:"طيران",centres:[C.NARSS]},
+  {id:43,field:"هندسة",name:"غزل ونسيج",centres:[C.NRC]},
+  {id:44,field:"هندسة",name:"فلزات",centres:[C.METALS]},
+  {id:45,field:"هندسة",name:"قوى وآلات",centres:[C.NRC,C.METALS,C.ERI2]},
+  {id:46,field:"هندسة",name:"كهرباء",centres:[C.NRC,C.ERI2]},
+  {id:47,field:"هندسة",name:"كيميائية",centres:[C.NRC,C.NIS,C.NMRI,C.PRI,C.ERI2]},
+  {id:48,field:"هندسة",name:"مدني",centres:[C.NRC,C.METALS]},
+  {id:49,field:"هندسة",name:"مساحة",centres:[C.NARSS]},
+  {id:50,field:"هندسة",name:"عمارة",centres:[C.NRC,C.NARSS]},
+  {id:51,field:"هندسة",name:"مناجم",centres:[C.NRC]},
+  {id:52,field:"هندسة",name:"مواد",centres:[C.NRC,C.NIS,C.CITY,C.ERI2]},
+  {id:53,field:"هندسة",name:"ميكاترونكس (ذكور فقط)",centres:[C.NRC,C.NIS,C.CITY,C.ERI2]},
+  {id:54,field:"هندسة",name:"ميكانيكا",centres:[C.NRC,C.METALS]},
+  {id:55,field:"هندسة",name:"ميكانيكا إنتاج",centres:[C.NRC,C.NMRI]},
+  {id:56,field:"هندسة",name:"ميكانيكا تصميم وإدارة سلسلة التوريد",centres:[C.NRC,C.NIS]},
+  {id:57,field:"طب وجراحة",name:"طب وجراحة",centres:[C.NRC,C.NMRI,C.CITY,C.TBRI]},
+  {id:58,field:"طب بيطري",name:"طب بيطري",centres:[C.NRC,C.CITY,C.TBRI,C.NMRI]},
+  {id:59,field:"صيدلة",name:"صيدلة",centres:[C.NRC,C.CITY]},
+  {id:60,field:"طب أسنان",name:"طب أسنان",centres:[C.NRC]},
+  {id:61,field:"زراعة",name:"تكنولوجيا حيوية / بيوتكنولوجي",centres:[C.NRC,C.CITY,C.TBRI]},
+  {id:62,field:"زراعة",name:"أراضي ومياه",centres:[C.NRC,C.CITY,C.NARSS]},
+  {id:63,field:"زراعة",name:"فسيولوجيا النبات",centres:[C.NRC]},
+  {id:64,field:"زراعة",name:"هندسة زراعية",centres:[C.NRC,C.NMRI,C.CITY]},
+  {id:65,field:"زراعة",name:"اقتصاد زراعي",centres:[C.NRC,C.CITY]},
+  {id:66,field:"زراعة",name:"الحشرات الاقتصادية والمبيدات",centres:[C.NRC]},
+  {id:67,field:"زراعة",name:"إرشاد زراعي",centres:[C.NRC]},
+  {id:68,field:"زراعة",name:"إنتاج أشجار",centres:[C.NRC]},
+  {id:69,field:"زراعة",name:"إنتاج حيواني",centres:[C.NRC,C.NMRI,C.CITY]},
+  {id:70,field:"زراعة",name:"إنتاج حيواني - دواجن",centres:[C.NRC,C.CITY]},
+  {id:71,field:"زراعة",name:"إنتاج نباتي",centres:[C.NRC]},
+  {id:72,field:"زراعة",name:"إنتاج نباتي - البساتين",centres:[C.NRC]},
+  {id:73,field:"زراعة",name:"إنتاج نباتي - البساتين - زينة",centres:[C.NRC]},
+  {id:74,field:"زراعة",name:"إنتاج نباتي - الخضر",centres:[C.NRC,C.CITY]},
+  {id:75,field:"زراعة",name:"إنتاج نباتي - الفاكهة",centres:[C.NRC,C.CITY]},
+  {id:76,field:"زراعة",name:"إنتاج نباتي - المحاصيل",centres:[C.NRC,C.CITY,C.TBRI]},
+  {id:77,field:"زراعة",name:"أمراض نبات",centres:[C.NRC,C.TBRI]},
+  {id:78,field:"زراعة",name:"إنتاج حيواني - أسماك",centres:[C.NMRI]},
+  {id:79,field:"زراعة",name:"بساتين",centres:[C.NRC]},
+  {id:80,field:"زراعة",name:"بساتين - فاكهة",centres:[C.NRC]},
+  {id:81,field:"زراعة",name:"حيوان زراعي ونيماتودا",centres:[C.NRC]},
+  {id:82,field:"زراعة",name:"صناعات غذائية",centres:[C.NRC,C.CITY]},
+  {id:83,field:"زراعة",name:"علم الحيوان الزراعي",centres:[C.NRC]},
+  {id:84,field:"زراعة",name:"علوم أغذية - ألبان",centres:[C.NRC]},
+  {id:85,field:"زراعة",name:"كيمياء حيوية",centres:[C.NRC]},
+  {id:86,field:"زراعة",name:"كيمياء وتقنية المبيدات",centres:[C.NRC]},
+  {id:87,field:"زراعة",name:"ميكروبيولوجي",centres:[C.NRC]},
+  {id:88,field:"زراعة",name:"نبات",centres:[C.NRC]},
+  {id:89,field:"زراعة",name:"نبات - بيئة نباتية",centres:[C.NRC]},
+  {id:90,field:"زراعة",name:"وراثة",centres:[C.NRC,C.NMRI]},
+  {id:91,field:"زراعة",name:"وقاية نبات",centres:[C.NRC]},
+  {id:92,field:"حاسبات",name:"ذكاء اصطناعي",centres:[C.NRC,C.CITY]},
+  {id:93,field:"حاسبات",name:"علوم الحاسب",centres:[C.NRC,C.CITY]},
+  {id:94,field:"استزراع مائي وتكنولوجيا مصايد الأسماك",name:"استزراع مائي وتكنولوجيا مصايد الأسماك",centres:[C.NMRI]},
+  {id:95,field:"فنون تطبيقية",name:"صباغة وطباعة وتجهيز",centres:[C.NRC]},
+  {id:96,field:"فنون تطبيقية",name:"غزل ونسيج",centres:[C.NRC]},
+  {id:97,field:"فنون تطبيقية",name:"ملابس",centres:[C.NRC]},
+  {id:98,field:"فنون تطبيقية",name:"طباعة ونشر وتغليف",centres:[C.NRC]},
+  {id:99,field:"اقتصاد منزلي",name:"التغذية العلاجية",centres:[C.NRC]},
+  {id:100,field:"اقتصاد منزلي",name:"ملابس ونسيج",centres:[C.NRC]},
+  {id:101,field:"آداب",name:"نشر",centres:[C.CITY]},
+  {id:102,field:"آداب",name:"مناهج",centres:[C.CITY]},
+  {id:103,field:"آداب",name:"أرشفة",centres:[C.CITY]},
+  {id:104,field:"آداب",name:"جغرافيا",centres:[C.CITY]},
+  {id:105,field:"آداب",name:"آثار",centres:[C.CITY]}
+];
+
+const FIELDS = [...new Set(SPECS.map(s => s.field))];
+
+// =========================================================
+// INIT
+// =========================================================
+const fieldSel = document.getElementById('field-select');
+const specGroup = document.getElementById('spec-group');
+const specBoxes = document.getElementById('spec-checkboxes');
+const specCount = document.getElementById('spec-count');
+const centreCard = document.getElementById('centre-card');
+const centreSel = document.getElementById('centre-select');
+const progress = document.getElementById('progress');
+
+FIELDS.forEach(f => {
+  const o = document.createElement('option');
+  o.value = f; o.textContent = f;
+  fieldSel.appendChild(o);
+});
+
+fieldSel.addEventListener('change', onFieldChange);
+
+function onFieldChange() {
+  const field = fieldSel.value;
+  specBoxes.innerHTML = '';
+  centreCard.classList.add('hidden');
+  centreSel.innerHTML = '<option value="">— اختر المركز —</option>';
+  specCount.classList.add('hidden');
+
+  if (!field) { specGroup.classList.add('hidden'); updateProgress(); return; }
+
+  SPECS.filter(s => s.field === field).forEach(s => {
+    const lbl = document.createElement('label');
+    lbl.className = 'checkbox-item';
+    lbl.innerHTML = `<input type="checkbox" value="${s.id}"><span>${s.name}</span><span class="spec-code">#${s.id}</span>`;
+    lbl.querySelector('input').addEventListener('change', function() {
+      lbl.classList.toggle('checked', this.checked);
+      updateCentres();
+    });
+    specBoxes.appendChild(lbl);
+  });
+  specGroup.classList.remove('hidden');
+  updateProgress();
+}
+
+function updateCentres() {
+  const checked = [...specBoxes.querySelectorAll('input:checked')].map(cb => parseInt(cb.value));
+  const n = checked.length;
+  specCount.textContent = n > 0 ? `تم اختيار ${n} تخصص` : '';
+  n > 0 ? specCount.classList.remove('hidden') : specCount.classList.add('hidden');
+
+  if (n === 0) { centreCard.classList.add('hidden'); updateProgress(); return; }
+
+  const centreIds = new Set();
+  checked.forEach(id => {
+    const s = SPECS.find(x => x.id === id);
+    if (s) s.centres.forEach(ci => centreIds.add(ci));
+  });
+
+  centreSel.innerHTML = '<option value="">— اختر المركز —</option>';
+  [...centreIds].sort((a,b)=>a-b).forEach(ci => {
+    const o = document.createElement('option');
+    o.value = ci; o.textContent = CENTRES[ci];
+    centreSel.appendChild(o);
+  });
+  centreCard.classList.remove('hidden');
+  updateProgress();
+}
+
+centreSel.addEventListener('change', updateProgress);
+document.getElementById('overall-pct').addEventListener('input', updateProgress);
+
+function updateProgress() {
+  let score = 0;
+  if (fieldSel.value) score += 20;
+  if ([...specBoxes.querySelectorAll('input:checked')].length > 0) score += 20;
+  if (centreSel.value) score += 20;
+  if (document.getElementById('overall-pct').value) score += 40;
+  progress.style.width = score + '%';
+}
+
+// =========================================================
+// SUBMIT
+// =========================================================
+async function submitForm() {
+  const errBox = document.getElementById('error-box');
+  errBox.classList.add('hidden');
+
+  const field = fieldSel.value;
+  const selectedSpecs = [...specBoxes.querySelectorAll('input:checked')].map(cb => {
+    return SPECS.find(s => s.id === parseInt(cb.value))?.name;
+  });
+  const centreIdx = centreSel.value;
+  const centre = centreIdx !== '' ? CENTRES[parseInt(centreIdx)] : '';
+  const pct = document.getElementById('overall-pct').value;
+  const engType = document.getElementById('eng-type').value;
+  const engScore = document.getElementById('eng-score').value;
+
+  if (!field) { showError('يرجى اختيار الكلية / المجموعة'); return; }
+  if (selectedSpecs.length === 0) { showError('يرجى اختيار تخصص واحد على الأقل'); return; }
+  if (!centre) { showError('يرجى اختيار المركز البحثي'); return; }
+  if (!pct || parseFloat(pct) < 0 || parseFloat(pct) > 100) { showError('يرجى إدخال النسبة المئوية الإجمالية بشكل صحيح (0-100)'); return; }
+
+  const payload = {
+    field,
+    specialities: selectedSpecs.join(' | '),
+    centre,
+    overallPct: parseFloat(pct),
+    engType: engType || '',
+    engScore: engScore || '',
+    timestamp: new Date().toISOString()
+  };
+
+  const btn = document.getElementById('submit-btn');
+  const btnText = document.getElementById('btn-text');
+  btn.disabled = true;
+  btnText.innerHTML = '<span class="spinner"></span> جاري الإرسال...';
+
+  try {
+    await fetch(SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    document.getElementById('form-view').classList.add('hidden');
+    document.getElementById('success-view').classList.remove('hidden');
+    progress.style.width = '100%';
+  } catch (e) {
+    showError('حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.');
+    btn.disabled = false;
+    btnText.textContent = 'إرسال الاستمارة';
+  }
+}
+
+function showError(msg) {
+  const b = document.getElementById('error-box');
+  b.textContent = msg;
+  b.classList.remove('hidden');
+  b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function resetForm() {
+  document.getElementById('form-view').classList.remove('hidden');
+  document.getElementById('success-view').classList.add('hidden');
+  document.getElementById('field-select').value = '';
+  document.getElementById('spec-group').classList.add('hidden');
+  document.getElementById('centre-card').classList.add('hidden');
+  document.getElementById('overall-pct').value = '';
+  document.getElementById('eng-type').value = '';
+  document.getElementById('eng-score').value = '';
+  document.getElementById('submit-btn').disabled = false;
+  document.getElementById('btn-text').textContent = 'إرسال الاستمارة';
+  progress.style.width = '0%';
+}
+</script>
+</body>
+</html>
