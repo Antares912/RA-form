@@ -478,7 +478,7 @@
 
 <script>
 // =========================================================
-// CONFIG — replace with your deployed Apps Script URL
+// CONFIG \u2014 replace with your deployed Apps Script URL
 // =========================================================
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwO6jUB_mfLnMuuJKABWy_Ll33ddG6Fwi-Zx6ik4_hv_6Cu2qFxl_MIrfuIEEDErkHPKw/exec';
 
@@ -486,127 +486,127 @@ const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwO6jUB_mfLnMuuJKABW
 // DATA
 // =========================================================
 const CENTRES = [
-  "المركز القومي للبحوث",
-  "مركز بحوث وتطوير الفلزات",
-  "المعهد القومي للمعايرة",
-  "المعهد القومي لعلوم البحار والمصايد",
-  "معهد بحوث البترول",
-  "معهد بحوث أمراض العيون",
-  "الهيئة القومية للاستشعار من البعد وعلوم الفضاء",
-  "مدينة الأبحاث العلمية والتطبيقات التكنولوجية",
-  "معهد تيودور بلهارس للأبحاث",
-  "المعهد القومي للبحوث الفلكية والجيوفيزيقية",
-  "معهد بحوث الإلكترونيات"
+  "\u0627\u0644\u0645\u0631\u0643\u0632 \u0627\u0644\u0642\u0648\u0645\u064a \u0644\u0644\u0628\u062d\u0648\u062b",
+  "\u0645\u0631\u0643\u0632 \u0628\u062d\u0648\u062b \u0648\u062a\u0637\u0648\u064a\u0631 \u0627\u0644\u0641\u0644\u0632\u0627\u062a",
+  "\u0627\u0644\u0645\u0639\u0647\u062f \u0627\u0644\u0642\u0648\u0645\u064a \u0644\u0644\u0645\u0639\u0627\u064a\u0631\u0629",
+  "\u0627\u0644\u0645\u0639\u0647\u062f \u0627\u0644\u0642\u0648\u0645\u064a \u0644\u0639\u0644\u0648\u0645 \u0627\u0644\u0628\u062d\u0627\u0631 \u0648\u0627\u0644\u0645\u0635\u0627\u064a\u062f",
+  "\u0645\u0639\u0647\u062f \u0628\u062d\u0648\u062b \u0627\u0644\u0628\u062a\u0631\u0648\u0644",
+  "\u0645\u0639\u0647\u062f \u0628\u062d\u0648\u062b \u0623\u0645\u0631\u0627\u0636 \u0627\u0644\u0639\u064a\u0648\u0646",
+  "\u0627\u0644\u0647\u064a\u0626\u0629 \u0627\u0644\u0642\u0648\u0645\u064a\u0629 \u0644\u0644\u0627\u0633\u062a\u0634\u0639\u0627\u0631 \u0645\u0646 \u0627\u0644\u0628\u0639\u062f \u0648\u0639\u0644\u0648\u0645 \u0627\u0644\u0641\u0636\u0627\u0621",
+  "\u0645\u062f\u064a\u0646\u0629 \u0627\u0644\u0623\u0628\u062d\u0627\u062b \u0627\u0644\u0639\u0644\u0645\u064a\u0629 \u0648\u0627\u0644\u062a\u0637\u0628\u064a\u0642\u0627\u062a \u0627\u0644\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a\u0629",
+  "\u0645\u0639\u0647\u062f \u062a\u064a\u0648\u062f\u0648\u0631 \u0628\u0644\u0647\u0627\u0631\u0633 \u0644\u0644\u0623\u0628\u062d\u0627\u062b",
+  "\u0627\u0644\u0645\u0639\u0647\u062f \u0627\u0644\u0642\u0648\u0645\u064a \u0644\u0644\u0628\u062d\u0648\u062b \u0627\u0644\u0641\u0644\u0643\u064a\u0629 \u0648\u0627\u0644\u062c\u064a\u0648\u0641\u064a\u0632\u064a\u0642\u064a\u0629",
+  "\u0645\u0639\u0647\u062f \u0628\u062d\u0648\u062b \u0627\u0644\u0625\u0644\u0643\u062a\u0631\u0648\u0646\u064a\u0627\u062a"
 ];
 
 const C = {NRC:0,METALS:1,NIS:2,NMRI:3,PRI:4,ERI:5,NARSS:6,CITY:7,TBRI:8,NRIAG:9,ERI2:10};
 
 const SPECS = [
-  {id:1,field:"علوم",name:"تكنولوجيا حيوية / بيوتكنولوجي",centres:[C.NRC,C.CITY,C.NARSS]},
-  {id:2,field:"علوم",name:"نبات كيمياء",centres:[C.NRC]},
-  {id:3,field:"علوم",name:"علوم الأرض - جيولوجيا هندسية",centres:[C.NRC]},
-  {id:4,field:"علوم",name:"علوم البحار",centres:[C.NRC,C.NMRI]},
-  {id:5,field:"علوم",name:"إحصاء بيئي",centres:[C.NRC]},
-  {id:6,field:"علوم",name:"بيولوجي",centres:[C.NRC,C.CITY,C.TBRI,C.NARSS]},
-  {id:7,field:"علوم",name:"بيئية",centres:[C.NRC,C.NARSS]},
-  {id:8,field:"علوم",name:"تكنولوجيا حيوية جزيئية",centres:[C.NRC]},
-  {id:9,field:"علوم",name:"ثروة سمكية ومصايد بحرية",centres:[C.NRC]},
-  {id:10,field:"علوم",name:"جيوفيزياء",centres:[C.NRC,C.PRI,C.NMRI,C.NARSS,C.NRIAG,C.ERI2]},
-  {id:11,field:"علوم",name:"جيولوجيا",centres:[C.NRC,C.METALS,C.PRI,C.NMRI,C.NARSS,C.NRIAG,C.ERI2]},
-  {id:12,field:"علوم",name:"جيولوجيا - كيمياء",centres:[C.NRC,C.PRI]},
-  {id:13,field:"علوم",name:"جيولوجيا مائية (ذكور فقط)",centres:[C.NARSS]},
-  {id:14,field:"علوم",name:"حاسب",centres:[C.NRC,C.NARSS]},
-  {id:15,field:"علوم",name:"حشرات",centres:[C.NRC,C.CITY]},
-  {id:16,field:"علوم",name:"حيوان",centres:[C.NRC,C.TBRI]},
-  {id:17,field:"علوم",name:"حيوان - كيمياء",centres:[C.NRC,C.TBRI]},
-  {id:18,field:"علوم",name:"رياضيات",centres:[C.NRC]},
-  {id:19,field:"علوم",name:"طفيليات",centres:[C.CITY]},
-  {id:20,field:"علوم",name:"فسيولوجي",centres:[C.CITY]},
-  {id:21,field:"علوم",name:"فلك",centres:[C.NRIAG]},
-  {id:22,field:"علوم",name:"فيزياء",centres:[C.NRC,C.METALS,C.PRI,C.NARSS,C.NRIAG,C.ERI2,C.ERI]},
-  {id:23,field:"علوم",name:"فيزياء - فلك",centres:[C.NRIAG]},
-  {id:24,field:"علوم",name:"فيزياء - كيمياء",centres:[C.NRC]},
-  {id:25,field:"علوم",name:"فيزياء حيوي",centres:[C.NRC,C.TBRI]},
-  {id:26,field:"علوم",name:"كيمياء",centres:[C.NRC,C.METALS,C.NIS,C.NMRI,C.PRI,C.NARSS,C.CITY,C.ERI2,C.ERI]},
-  {id:27,field:"علوم",name:"كيمياء تطبيقية",centres:[C.NRC]},
-  {id:28,field:"علوم",name:"كيمياء حيوية",centres:[C.NRC,C.CITY]},
-  {id:29,field:"علوم",name:"كيمياء حيوية - كيمياء",centres:[C.NRC]},
-  {id:30,field:"علوم",name:"ميكروبيولوجي",centres:[C.NRC,C.NIS,C.NMRI,C.CITY,C.NARSS]},
-  {id:31,field:"علوم",name:"ميكروبيولوجي - كيمياء",centres:[C.NRC]},
-  {id:32,field:"علوم",name:"نانوتكنولوجي",centres:[C.CITY]},
-  {id:33,field:"علوم",name:"نبات - ميكروبيولوجي",centres:[C.CITY]},
-  {id:34,field:"هندسة",name:"اتصالات",centres:[C.NRC,C.ERI2]},
-  {id:35,field:"هندسة",name:"اتصالات والكترونيات",centres:[C.ERI2]},
-  {id:36,field:"هندسة",name:"الكترونيات",centres:[C.NRC,C.CITY]},
-  {id:37,field:"هندسة",name:"بحرية",centres:[C.NMRI]},
-  {id:38,field:"هندسة",name:"تعدين",centres:[C.NRC,C.METALS]},
-  {id:39,field:"هندسة",name:"حاسبات",centres:[C.NRC,C.CITY,C.ERI2]},
-  {id:40,field:"هندسة",name:"صناعية",centres:[C.NRC,C.NIS]},
-  {id:41,field:"هندسة",name:"طبية",centres:[C.NRC,C.NIS]},
-  {id:42,field:"هندسة",name:"طيران",centres:[C.NARSS]},
-  {id:43,field:"هندسة",name:"غزل ونسيج",centres:[C.NRC]},
-  {id:44,field:"هندسة",name:"فلزات",centres:[C.METALS]},
-  {id:45,field:"هندسة",name:"قوى وآلات",centres:[C.NRC,C.METALS,C.ERI2]},
-  {id:46,field:"هندسة",name:"كهرباء",centres:[C.NRC,C.ERI2]},
-  {id:47,field:"هندسة",name:"كيميائية",centres:[C.NRC,C.NIS,C.NMRI,C.PRI,C.ERI2]},
-  {id:48,field:"هندسة",name:"مدني",centres:[C.NRC,C.METALS]},
-  {id:49,field:"هندسة",name:"مساحة",centres:[C.NARSS]},
-  {id:50,field:"هندسة",name:"عمارة",centres:[C.NRC,C.NARSS]},
-  {id:51,field:"هندسة",name:"مناجم",centres:[C.NRC]},
-  {id:52,field:"هندسة",name:"مواد",centres:[C.NRC,C.NIS,C.CITY,C.ERI2]},
-  {id:53,field:"هندسة",name:"ميكاترونكس (ذكور فقط)",centres:[C.NRC,C.NIS,C.CITY,C.ERI2]},
-  {id:54,field:"هندسة",name:"ميكانيكا",centres:[C.NRC,C.METALS]},
-  {id:55,field:"هندسة",name:"ميكانيكا إنتاج",centres:[C.NRC,C.NMRI]},
-  {id:56,field:"هندسة",name:"ميكانيكا تصميم وإدارة سلسلة التوريد",centres:[C.NRC,C.NIS]},
-  {id:57,field:"طب وجراحة",name:"طب وجراحة",centres:[C.NRC,C.NMRI,C.CITY,C.TBRI]},
-  {id:58,field:"طب بيطري",name:"طب بيطري",centres:[C.NRC,C.CITY,C.TBRI,C.NMRI]},
-  {id:59,field:"صيدلة",name:"صيدلة",centres:[C.NRC,C.CITY]},
-  {id:60,field:"طب أسنان",name:"طب أسنان",centres:[C.NRC]},
-  {id:61,field:"زراعة",name:"تكنولوجيا حيوية / بيوتكنولوجي",centres:[C.NRC,C.CITY,C.TBRI]},
-  {id:62,field:"زراعة",name:"أراضي ومياه",centres:[C.NRC,C.CITY,C.NARSS]},
-  {id:63,field:"زراعة",name:"فسيولوجيا النبات",centres:[C.NRC]},
-  {id:64,field:"زراعة",name:"هندسة زراعية",centres:[C.NRC,C.NMRI,C.CITY]},
-  {id:65,field:"زراعة",name:"اقتصاد زراعي",centres:[C.NRC,C.CITY]},
-  {id:66,field:"زراعة",name:"الحشرات الاقتصادية والمبيدات",centres:[C.NRC]},
-  {id:67,field:"زراعة",name:"إرشاد زراعي",centres:[C.NRC]},
-  {id:68,field:"زراعة",name:"إنتاج أشجار",centres:[C.NRC]},
-  {id:69,field:"زراعة",name:"إنتاج حيواني",centres:[C.NRC,C.NMRI,C.CITY]},
-  {id:70,field:"زراعة",name:"إنتاج حيواني - دواجن",centres:[C.NRC,C.CITY]},
-  {id:71,field:"زراعة",name:"إنتاج نباتي",centres:[C.NRC]},
-  {id:72,field:"زراعة",name:"إنتاج نباتي - البساتين",centres:[C.NRC]},
-  {id:73,field:"زراعة",name:"إنتاج نباتي - البساتين - زينة",centres:[C.NRC]},
-  {id:74,field:"زراعة",name:"إنتاج نباتي - الخضر",centres:[C.NRC,C.CITY]},
-  {id:75,field:"زراعة",name:"إنتاج نباتي - الفاكهة",centres:[C.NRC,C.CITY]},
-  {id:76,field:"زراعة",name:"إنتاج نباتي - المحاصيل",centres:[C.NRC,C.CITY,C.TBRI]},
-  {id:77,field:"زراعة",name:"أمراض نبات",centres:[C.NRC,C.TBRI]},
-  {id:78,field:"زراعة",name:"إنتاج حيواني - أسماك",centres:[C.NMRI]},
-  {id:79,field:"زراعة",name:"بساتين",centres:[C.NRC]},
-  {id:80,field:"زراعة",name:"بساتين - فاكهة",centres:[C.NRC]},
-  {id:81,field:"زراعة",name:"حيوان زراعي ونيماتودا",centres:[C.NRC]},
-  {id:82,field:"زراعة",name:"صناعات غذائية",centres:[C.NRC,C.CITY]},
-  {id:83,field:"زراعة",name:"علم الحيوان الزراعي",centres:[C.NRC]},
-  {id:84,field:"زراعة",name:"علوم أغذية - ألبان",centres:[C.NRC]},
-  {id:85,field:"زراعة",name:"كيمياء حيوية",centres:[C.NRC]},
-  {id:86,field:"زراعة",name:"كيمياء وتقنية المبيدات",centres:[C.NRC]},
-  {id:87,field:"زراعة",name:"ميكروبيولوجي",centres:[C.NRC]},
-  {id:88,field:"زراعة",name:"نبات",centres:[C.NRC]},
-  {id:89,field:"زراعة",name:"نبات - بيئة نباتية",centres:[C.NRC]},
-  {id:90,field:"زراعة",name:"وراثة",centres:[C.NRC,C.NMRI]},
-  {id:91,field:"زراعة",name:"وقاية نبات",centres:[C.NRC]},
-  {id:92,field:"حاسبات",name:"ذكاء اصطناعي",centres:[C.NRC,C.CITY]},
-  {id:93,field:"حاسبات",name:"علوم الحاسب",centres:[C.NRC,C.CITY]},
-  {id:94,field:"استزراع مائي وتكنولوجيا مصايد الأسماك",name:"استزراع مائي وتكنولوجيا مصايد الأسماك",centres:[C.NMRI]},
-  {id:95,field:"فنون تطبيقية",name:"صباغة وطباعة وتجهيز",centres:[C.NRC]},
-  {id:96,field:"فنون تطبيقية",name:"غزل ونسيج",centres:[C.NRC]},
-  {id:97,field:"فنون تطبيقية",name:"ملابس",centres:[C.NRC]},
-  {id:98,field:"فنون تطبيقية",name:"طباعة ونشر وتغليف",centres:[C.NRC]},
-  {id:99,field:"اقتصاد منزلي",name:"التغذية العلاجية",centres:[C.NRC]},
-  {id:100,field:"اقتصاد منزلي",name:"ملابس ونسيج",centres:[C.NRC]},
-  {id:101,field:"آداب",name:"نشر",centres:[C.CITY]},
-  {id:102,field:"آداب",name:"مناهج",centres:[C.CITY]},
-  {id:103,field:"آداب",name:"أرشفة",centres:[C.CITY]},
-  {id:104,field:"آداب",name:"جغرافيا",centres:[C.CITY]},
-  {id:105,field:"آداب",name:"آثار",centres:[C.CITY]}
+  {id:1,field:"\u0639\u0644\u0648\u0645",name:"\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a\u0627 \u062d\u064a\u0648\u064a\u0629 / \u0628\u064a\u0648\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a",centres:[C.NRC,C.CITY,C.NARSS]},
+  {id:2,field:"\u0639\u0644\u0648\u0645",name:"\u0646\u0628\u0627\u062a \u0643\u064a\u0645\u064a\u0627\u0621",centres:[C.NRC]},
+  {id:3,field:"\u0639\u0644\u0648\u0645",name:"\u0639\u0644\u0648\u0645 \u0627\u0644\u0623\u0631\u0636 - \u062c\u064a\u0648\u0644\u0648\u062c\u064a\u0627 \u0647\u0646\u062f\u0633\u064a\u0629",centres:[C.NRC]},
+  {id:4,field:"\u0639\u0644\u0648\u0645",name:"\u0639\u0644\u0648\u0645 \u0627\u0644\u0628\u062d\u0627\u0631",centres:[C.NRC,C.NMRI]},
+  {id:5,field:"\u0639\u0644\u0648\u0645",name:"\u0625\u062d\u0635\u0627\u0621 \u0628\u064a\u0626\u064a",centres:[C.NRC]},
+  {id:6,field:"\u0639\u0644\u0648\u0645",name:"\u0628\u064a\u0648\u0644\u0648\u062c\u064a",centres:[C.NRC,C.CITY,C.TBRI,C.NARSS]},
+  {id:7,field:"\u0639\u0644\u0648\u0645",name:"\u0628\u064a\u0626\u064a\u0629",centres:[C.NRC,C.NARSS]},
+  {id:8,field:"\u0639\u0644\u0648\u0645",name:"\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a\u0627 \u062d\u064a\u0648\u064a\u0629 \u062c\u0632\u064a\u0626\u064a\u0629",centres:[C.NRC]},
+  {id:9,field:"\u0639\u0644\u0648\u0645",name:"\u062b\u0631\u0648\u0629 \u0633\u0645\u0643\u064a\u0629 \u0648\u0645\u0635\u0627\u064a\u062f \u0628\u062d\u0631\u064a\u0629",centres:[C.NRC]},
+  {id:10,field:"\u0639\u0644\u0648\u0645",name:"\u062c\u064a\u0648\u0641\u064a\u0632\u064a\u0627\u0621",centres:[C.NRC,C.PRI,C.NMRI,C.NARSS,C.NRIAG,C.ERI2]},
+  {id:11,field:"\u0639\u0644\u0648\u0645",name:"\u062c\u064a\u0648\u0644\u0648\u062c\u064a\u0627",centres:[C.NRC,C.METALS,C.PRI,C.NMRI,C.NARSS,C.NRIAG,C.ERI2]},
+  {id:12,field:"\u0639\u0644\u0648\u0645",name:"\u062c\u064a\u0648\u0644\u0648\u062c\u064a\u0627 - \u0643\u064a\u0645\u064a\u0627\u0621",centres:[C.NRC,C.PRI]},
+  {id:13,field:"\u0639\u0644\u0648\u0645",name:"\u062c\u064a\u0648\u0644\u0648\u062c\u064a\u0627 \u0645\u0627\u0626\u064a\u0629 (\u0630\u0643\u0648\u0631 \u0641\u0642\u0637)",centres:[C.NARSS]},
+  {id:14,field:"\u0639\u0644\u0648\u0645",name:"\u062d\u0627\u0633\u0628",centres:[C.NRC,C.NARSS]},
+  {id:15,field:"\u0639\u0644\u0648\u0645",name:"\u062d\u0634\u0631\u0627\u062a",centres:[C.NRC,C.CITY]},
+  {id:16,field:"\u0639\u0644\u0648\u0645",name:"\u062d\u064a\u0648\u0627\u0646",centres:[C.NRC,C.TBRI]},
+  {id:17,field:"\u0639\u0644\u0648\u0645",name:"\u062d\u064a\u0648\u0627\u0646 - \u0643\u064a\u0645\u064a\u0627\u0621",centres:[C.NRC,C.TBRI]},
+  {id:18,field:"\u0639\u0644\u0648\u0645",name:"\u0631\u064a\u0627\u0636\u064a\u0627\u062a",centres:[C.NRC]},
+  {id:19,field:"\u0639\u0644\u0648\u0645",name:"\u0637\u0641\u064a\u0644\u064a\u0627\u062a",centres:[C.CITY]},
+  {id:20,field:"\u0639\u0644\u0648\u0645",name:"\u0641\u0633\u064a\u0648\u0644\u0648\u062c\u064a",centres:[C.CITY]},
+  {id:21,field:"\u0639\u0644\u0648\u0645",name:"\u0641\u0644\u0643",centres:[C.NRIAG]},
+  {id:22,field:"\u0639\u0644\u0648\u0645",name:"\u0641\u064a\u0632\u064a\u0627\u0621",centres:[C.NRC,C.METALS,C.PRI,C.NARSS,C.NRIAG,C.ERI2,C.ERI]},
+  {id:23,field:"\u0639\u0644\u0648\u0645",name:"\u0641\u064a\u0632\u064a\u0627\u0621 - \u0641\u0644\u0643",centres:[C.NRIAG]},
+  {id:24,field:"\u0639\u0644\u0648\u0645",name:"\u0641\u064a\u0632\u064a\u0627\u0621 - \u0643\u064a\u0645\u064a\u0627\u0621",centres:[C.NRC]},
+  {id:25,field:"\u0639\u0644\u0648\u0645",name:"\u0641\u064a\u0632\u064a\u0627\u0621 \u062d\u064a\u0648\u064a",centres:[C.NRC,C.TBRI]},
+  {id:26,field:"\u0639\u0644\u0648\u0645",name:"\u0643\u064a\u0645\u064a\u0627\u0621",centres:[C.NRC,C.METALS,C.NIS,C.NMRI,C.PRI,C.NARSS,C.CITY,C.ERI2,C.ERI]},
+  {id:27,field:"\u0639\u0644\u0648\u0645",name:"\u0643\u064a\u0645\u064a\u0627\u0621 \u062a\u0637\u0628\u064a\u0642\u064a\u0629",centres:[C.NRC]},
+  {id:28,field:"\u0639\u0644\u0648\u0645",name:"\u0643\u064a\u0645\u064a\u0627\u0621 \u062d\u064a\u0648\u064a\u0629",centres:[C.NRC,C.CITY]},
+  {id:29,field:"\u0639\u0644\u0648\u0645",name:"\u0643\u064a\u0645\u064a\u0627\u0621 \u062d\u064a\u0648\u064a\u0629 - \u0643\u064a\u0645\u064a\u0627\u0621",centres:[C.NRC]},
+  {id:30,field:"\u0639\u0644\u0648\u0645",name:"\u0645\u064a\u0643\u0631\u0648\u0628\u064a\u0648\u0644\u0648\u062c\u064a",centres:[C.NRC,C.NIS,C.NMRI,C.CITY,C.NARSS]},
+  {id:31,field:"\u0639\u0644\u0648\u0645",name:"\u0645\u064a\u0643\u0631\u0648\u0628\u064a\u0648\u0644\u0648\u062c\u064a - \u0643\u064a\u0645\u064a\u0627\u0621",centres:[C.NRC]},
+  {id:32,field:"\u0639\u0644\u0648\u0645",name:"\u0646\u0627\u0646\u0648\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a",centres:[C.CITY]},
+  {id:33,field:"\u0639\u0644\u0648\u0645",name:"\u0646\u0628\u0627\u062a - \u0645\u064a\u0643\u0631\u0648\u0628\u064a\u0648\u0644\u0648\u062c\u064a",centres:[C.CITY]},
+  {id:34,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0627\u062a\u0635\u0627\u0644\u0627\u062a",centres:[C.NRC,C.ERI2]},
+  {id:35,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0627\u062a\u0635\u0627\u0644\u0627\u062a \u0648\u0627\u0644\u0643\u062a\u0631\u0648\u0646\u064a\u0627\u062a",centres:[C.ERI2]},
+  {id:36,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0627\u0644\u0643\u062a\u0631\u0648\u0646\u064a\u0627\u062a",centres:[C.NRC,C.CITY]},
+  {id:37,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0628\u062d\u0631\u064a\u0629",centres:[C.NMRI]},
+  {id:38,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u062a\u0639\u062f\u064a\u0646",centres:[C.NRC,C.METALS]},
+  {id:39,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u062d\u0627\u0633\u0628\u0627\u062a",centres:[C.NRC,C.CITY,C.ERI2]},
+  {id:40,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0635\u0646\u0627\u0639\u064a\u0629",centres:[C.NRC,C.NIS]},
+  {id:41,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0637\u0628\u064a\u0629",centres:[C.NRC,C.NIS]},
+  {id:42,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0637\u064a\u0631\u0627\u0646",centres:[C.NARSS]},
+  {id:43,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u063a\u0632\u0644 \u0648\u0646\u0633\u064a\u062c",centres:[C.NRC]},
+  {id:44,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0641\u0644\u0632\u0627\u062a",centres:[C.METALS]},
+  {id:45,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0642\u0648\u0649 \u0648\u0622\u0644\u0627\u062a",centres:[C.NRC,C.METALS,C.ERI2]},
+  {id:46,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0643\u0647\u0631\u0628\u0627\u0621",centres:[C.NRC,C.ERI2]},
+  {id:47,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0643\u064a\u0645\u064a\u0627\u0626\u064a\u0629",centres:[C.NRC,C.NIS,C.NMRI,C.PRI,C.ERI2]},
+  {id:48,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0645\u062f\u0646\u064a",centres:[C.NRC,C.METALS]},
+  {id:49,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0645\u0633\u0627\u062d\u0629",centres:[C.NARSS]},
+  {id:50,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0639\u0645\u0627\u0631\u0629",centres:[C.NRC,C.NARSS]},
+  {id:51,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0645\u0646\u0627\u062c\u0645",centres:[C.NRC]},
+  {id:52,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0645\u0648\u0627\u062f",centres:[C.NRC,C.NIS,C.CITY,C.ERI2]},
+  {id:53,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0645\u064a\u0643\u0627\u062a\u0631\u0648\u0646\u0643\u0633 (\u0630\u0643\u0648\u0631 \u0641\u0642\u0637)",centres:[C.NRC,C.NIS,C.CITY,C.ERI2]},
+  {id:54,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0645\u064a\u0643\u0627\u0646\u064a\u0643\u0627",centres:[C.NRC,C.METALS]},
+  {id:55,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0645\u064a\u0643\u0627\u0646\u064a\u0643\u0627 \u0625\u0646\u062a\u0627\u062c",centres:[C.NRC,C.NMRI]},
+  {id:56,field:"\u0647\u0646\u062f\u0633\u0629",name:"\u0645\u064a\u0643\u0627\u0646\u064a\u0643\u0627 \u062a\u0635\u0645\u064a\u0645 \u0648\u0625\u062f\u0627\u0631\u0629 \u0633\u0644\u0633\u0644\u0629 \u0627\u0644\u062a\u0648\u0631\u064a\u062f",centres:[C.NRC,C.NIS]},
+  {id:57,field:"\u0637\u0628 \u0648\u062c\u0631\u0627\u062d\u0629",name:"\u0637\u0628 \u0648\u062c\u0631\u0627\u062d\u0629",centres:[C.NRC,C.NMRI,C.CITY,C.TBRI]},
+  {id:58,field:"\u0637\u0628 \u0628\u064a\u0637\u0631\u064a",name:"\u0637\u0628 \u0628\u064a\u0637\u0631\u064a",centres:[C.NRC,C.CITY,C.TBRI,C.NMRI]},
+  {id:59,field:"\u0635\u064a\u062f\u0644\u0629",name:"\u0635\u064a\u062f\u0644\u0629",centres:[C.NRC,C.CITY]},
+  {id:60,field:"\u0637\u0628 \u0623\u0633\u0646\u0627\u0646",name:"\u0637\u0628 \u0623\u0633\u0646\u0627\u0646",centres:[C.NRC]},
+  {id:61,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a\u0627 \u062d\u064a\u0648\u064a\u0629 / \u0628\u064a\u0648\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a",centres:[C.NRC,C.CITY,C.TBRI]},
+  {id:62,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0623\u0631\u0627\u0636\u064a \u0648\u0645\u064a\u0627\u0647",centres:[C.NRC,C.CITY,C.NARSS]},
+  {id:63,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0641\u0633\u064a\u0648\u0644\u0648\u062c\u064a\u0627 \u0627\u0644\u0646\u0628\u0627\u062a",centres:[C.NRC]},
+  {id:64,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0647\u0646\u062f\u0633\u0629 \u0632\u0631\u0627\u0639\u064a\u0629",centres:[C.NRC,C.NMRI,C.CITY]},
+  {id:65,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0627\u0642\u062a\u0635\u0627\u062f \u0632\u0631\u0627\u0639\u064a",centres:[C.NRC,C.CITY]},
+  {id:66,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0627\u0644\u062d\u0634\u0631\u0627\u062a \u0627\u0644\u0627\u0642\u062a\u0635\u0627\u062f\u064a\u0629 \u0648\u0627\u0644\u0645\u0628\u064a\u062f\u0627\u062a",centres:[C.NRC]},
+  {id:67,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0625\u0631\u0634\u0627\u062f \u0632\u0631\u0627\u0639\u064a",centres:[C.NRC]},
+  {id:68,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0625\u0646\u062a\u0627\u062c \u0623\u0634\u062c\u0627\u0631",centres:[C.NRC]},
+  {id:69,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0625\u0646\u062a\u0627\u062c \u062d\u064a\u0648\u0627\u0646\u064a",centres:[C.NRC,C.NMRI,C.CITY]},
+  {id:70,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0625\u0646\u062a\u0627\u062c \u062d\u064a\u0648\u0627\u0646\u064a - \u062f\u0648\u0627\u062c\u0646",centres:[C.NRC,C.CITY]},
+  {id:71,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0625\u0646\u062a\u0627\u062c \u0646\u0628\u0627\u062a\u064a",centres:[C.NRC]},
+  {id:72,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0625\u0646\u062a\u0627\u062c \u0646\u0628\u0627\u062a\u064a - \u0627\u0644\u0628\u0633\u0627\u062a\u064a\u0646",centres:[C.NRC]},
+  {id:73,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0625\u0646\u062a\u0627\u062c \u0646\u0628\u0627\u062a\u064a - \u0627\u0644\u0628\u0633\u0627\u062a\u064a\u0646 - \u0632\u064a\u0646\u0629",centres:[C.NRC]},
+  {id:74,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0625\u0646\u062a\u0627\u062c \u0646\u0628\u0627\u062a\u064a - \u0627\u0644\u062e\u0636\u0631",centres:[C.NRC,C.CITY]},
+  {id:75,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0625\u0646\u062a\u0627\u062c \u0646\u0628\u0627\u062a\u064a - \u0627\u0644\u0641\u0627\u0643\u0647\u0629",centres:[C.NRC,C.CITY]},
+  {id:76,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0625\u0646\u062a\u0627\u062c \u0646\u0628\u0627\u062a\u064a - \u0627\u0644\u0645\u062d\u0627\u0635\u064a\u0644",centres:[C.NRC,C.CITY,C.TBRI]},
+  {id:77,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0623\u0645\u0631\u0627\u0636 \u0646\u0628\u0627\u062a",centres:[C.NRC,C.TBRI]},
+  {id:78,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0625\u0646\u062a\u0627\u062c \u062d\u064a\u0648\u0627\u0646\u064a - \u0623\u0633\u0645\u0627\u0643",centres:[C.NMRI]},
+  {id:79,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0628\u0633\u0627\u062a\u064a\u0646",centres:[C.NRC]},
+  {id:80,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0628\u0633\u0627\u062a\u064a\u0646 - \u0641\u0627\u0643\u0647\u0629",centres:[C.NRC]},
+  {id:81,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u062d\u064a\u0648\u0627\u0646 \u0632\u0631\u0627\u0639\u064a \u0648\u0646\u064a\u0645\u0627\u062a\u0648\u062f\u0627",centres:[C.NRC]},
+  {id:82,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0635\u0646\u0627\u0639\u0627\u062a \u063a\u0630\u0627\u0626\u064a\u0629",centres:[C.NRC,C.CITY]},
+  {id:83,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0639\u0644\u0645 \u0627\u0644\u062d\u064a\u0648\u0627\u0646 \u0627\u0644\u0632\u0631\u0627\u0639\u064a",centres:[C.NRC]},
+  {id:84,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0639\u0644\u0648\u0645 \u0623\u063a\u0630\u064a\u0629 - \u0623\u0644\u0628\u0627\u0646",centres:[C.NRC]},
+  {id:85,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0643\u064a\u0645\u064a\u0627\u0621 \u062d\u064a\u0648\u064a\u0629",centres:[C.NRC]},
+  {id:86,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0643\u064a\u0645\u064a\u0627\u0621 \u0648\u062a\u0642\u0646\u064a\u0629 \u0627\u0644\u0645\u0628\u064a\u062f\u0627\u062a",centres:[C.NRC]},
+  {id:87,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0645\u064a\u0643\u0631\u0648\u0628\u064a\u0648\u0644\u0648\u062c\u064a",centres:[C.NRC]},
+  {id:88,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0646\u0628\u0627\u062a",centres:[C.NRC]},
+  {id:89,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0646\u0628\u0627\u062a - \u0628\u064a\u0626\u0629 \u0646\u0628\u0627\u062a\u064a\u0629",centres:[C.NRC]},
+  {id:90,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0648\u0631\u0627\u062b\u0629",centres:[C.NRC,C.NMRI]},
+  {id:91,field:"\u0632\u0631\u0627\u0639\u0629",name:"\u0648\u0642\u0627\u064a\u0629 \u0646\u0628\u0627\u062a",centres:[C.NRC]},
+  {id:92,field:"\u062d\u0627\u0633\u0628\u0627\u062a",name:"\u0630\u0643\u0627\u0621 \u0627\u0635\u0637\u0646\u0627\u0639\u064a",centres:[C.NRC,C.CITY]},
+  {id:93,field:"\u062d\u0627\u0633\u0628\u0627\u062a",name:"\u0639\u0644\u0648\u0645 \u0627\u0644\u062d\u0627\u0633\u0628",centres:[C.NRC,C.CITY]},
+  {id:94,field:"\u0627\u0633\u062a\u0632\u0631\u0627\u0639 \u0645\u0627\u0626\u064a \u0648\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a\u0627 \u0645\u0635\u0627\u064a\u062f \u0627\u0644\u0623\u0633\u0645\u0627\u0643",name:"\u0627\u0633\u062a\u0632\u0631\u0627\u0639 \u0645\u0627\u0626\u064a \u0648\u062a\u0643\u0646\u0648\u0644\u0648\u062c\u064a\u0627 \u0645\u0635\u0627\u064a\u062f \u0627\u0644\u0623\u0633\u0645\u0627\u0643",centres:[C.NMRI]},
+  {id:95,field:"\u0641\u0646\u0648\u0646 \u062a\u0637\u0628\u064a\u0642\u064a\u0629",name:"\u0635\u0628\u0627\u063a\u0629 \u0648\u0637\u0628\u0627\u0639\u0629 \u0648\u062a\u062c\u0647\u064a\u0632",centres:[C.NRC]},
+  {id:96,field:"\u0641\u0646\u0648\u0646 \u062a\u0637\u0628\u064a\u0642\u064a\u0629",name:"\u063a\u0632\u0644 \u0648\u0646\u0633\u064a\u062c",centres:[C.NRC]},
+  {id:97,field:"\u0641\u0646\u0648\u0646 \u062a\u0637\u0628\u064a\u0642\u064a\u0629",name:"\u0645\u0644\u0627\u0628\u0633",centres:[C.NRC]},
+  {id:98,field:"\u0641\u0646\u0648\u0646 \u062a\u0637\u0628\u064a\u0642\u064a\u0629",name:"\u0637\u0628\u0627\u0639\u0629 \u0648\u0646\u0634\u0631 \u0648\u062a\u063a\u0644\u064a\u0641",centres:[C.NRC]},
+  {id:99,field:"\u0627\u0642\u062a\u0635\u0627\u062f \u0645\u0646\u0632\u0644\u064a",name:"\u0627\u0644\u062a\u063a\u0630\u064a\u0629 \u0627\u0644\u0639\u0644\u0627\u062c\u064a\u0629",centres:[C.NRC]},
+  {id:100,field:"\u0627\u0642\u062a\u0635\u0627\u062f \u0645\u0646\u0632\u0644\u064a",name:"\u0645\u0644\u0627\u0628\u0633 \u0648\u0646\u0633\u064a\u062c",centres:[C.NRC]},
+  {id:101,field:"\u0622\u062f\u0627\u0628",name:"\u0646\u0634\u0631",centres:[C.CITY]},
+  {id:102,field:"\u0622\u062f\u0627\u0628",name:"\u0645\u0646\u0627\u0647\u062c",centres:[C.CITY]},
+  {id:103,field:"\u0622\u062f\u0627\u0628",name:"\u0623\u0631\u0634\u0641\u0629",centres:[C.CITY]},
+  {id:104,field:"\u0622\u062f\u0627\u0628",name:"\u062c\u063a\u0631\u0627\u0641\u064a\u0627",centres:[C.CITY]},
+  {id:105,field:"\u0622\u062f\u0627\u0628",name:"\u0622\u062b\u0627\u0631",centres:[C.CITY]}
 ];
 
 const FIELDS = [...new Set(SPECS.map(s => s.field))];
@@ -634,7 +634,7 @@ function onFieldChange() {
   const field = fieldSel.value;
   specBoxes.innerHTML = '';
   centreCard.classList.add('hidden');
-  centreSel.innerHTML = '<option value="">— اختر المركز —</option>';
+  centreSel.innerHTML = '<option value="">\u2014 \u0627\u062e\u062a\u0631 \u0627\u0644\u0645\u0631\u0643\u0632 \u2014</option>';
   specCount.classList.add('hidden');
 
   if (!field) { specGroup.classList.add('hidden'); updateProgress(); return; }
@@ -656,7 +656,7 @@ function onFieldChange() {
 function updateCentres() {
   const checked = [...specBoxes.querySelectorAll('input:checked')].map(cb => parseInt(cb.value));
   const n = checked.length;
-  specCount.textContent = n > 0 ? `تم اختيار ${n} تخصص` : '';
+  specCount.textContent = n > 0 ? `\u062a\u0645 \u0627\u062e\u062a\u064a\u0627\u0631 ${n} \u062a\u062e\u0635\u0635` : '';
   n > 0 ? specCount.classList.remove('hidden') : specCount.classList.add('hidden');
 
   if (n === 0) { centreCard.classList.add('hidden'); updateProgress(); return; }
@@ -667,7 +667,7 @@ function updateCentres() {
     if (s) s.centres.forEach(ci => centreIds.add(ci));
   });
 
-  centreSel.innerHTML = '<option value="">— اختر المركز —</option>';
+  centreSel.innerHTML = '<option value="">\u2014 \u0627\u062e\u062a\u0631 \u0627\u0644\u0645\u0631\u0643\u0632 \u2014</option>';
   [...centreIds].sort((a,b)=>a-b).forEach(ci => {
     const o = document.createElement('option');
     o.value = ci; o.textContent = CENTRES[ci];
@@ -706,10 +706,10 @@ async function submitForm() {
   const engType = document.getElementById('eng-type').value;
   const engScore = document.getElementById('eng-score').value;
 
-  if (!field) { showError('يرجى اختيار الكلية / المجموعة'); return; }
-  if (selectedSpecs.length === 0) { showError('يرجى اختيار تخصص واحد على الأقل'); return; }
-  if (!centre) { showError('يرجى اختيار المركز البحثي'); return; }
-  if (!pct || parseFloat(pct) < 0 || parseFloat(pct) > 100) { showError('يرجى إدخال النسبة المئوية الإجمالية بشكل صحيح (0-100)'); return; }
+  if (!field) { showError('\u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u0627\u0644\u0643\u0644\u064a\u0629 / \u0627\u0644\u0645\u062c\u0645\u0648\u0639\u0629'); return; }
+  if (selectedSpecs.length === 0) { showError('\u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u062a\u062e\u0635\u0635 \u0648\u0627\u062d\u062f \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644'); return; }
+  if (!centre) { showError('\u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u0627\u0644\u0645\u0631\u0643\u0632 \u0627\u0644\u0628\u062d\u062b\u064a'); return; }
+  if (!pct || parseFloat(pct) < 0 || parseFloat(pct) > 100) { showError('\u064a\u0631\u062c\u0649 \u0625\u062f\u062e\u0627\u0644 \u0627\u0644\u0646\u0633\u0628\u0629 \u0627\u0644\u0645\u0626\u0648\u064a\u0629 \u0627\u0644\u0625\u062c\u0645\u0627\u0644\u064a\u0629 \u0628\u0634\u0643\u0644 \u0635\u062d\u064a\u062d (0-100)'); return; }
 
   const payload = {
     field,
@@ -724,7 +724,7 @@ async function submitForm() {
   const btn = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
   btn.disabled = true;
-  btnText.innerHTML = '<span class="spinner"></span> جاري الإرسال...';
+  btnText.innerHTML = '<span class="spinner"></span> \u062c\u0627\u0631\u064a \u0627\u0644\u0625\u0631\u0633\u0627\u0644...';
 
   try {
     await fetch(SCRIPT_URL, {
@@ -737,9 +737,9 @@ async function submitForm() {
     document.getElementById('success-view').classList.remove('hidden');
     progress.style.width = '100%';
   } catch (e) {
-    showError('حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.');
+    showError('\u062d\u062f\u062b \u062e\u0637\u0623 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u0625\u0631\u0633\u0627\u0644. \u064a\u0631\u062c\u0649 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629 \u0645\u0631\u0629 \u0623\u062e\u0631\u0649.');
     btn.disabled = false;
-    btnText.textContent = 'إرسال الاستمارة';
+    btnText.textContent = '\u0625\u0631\u0633\u0627\u0644 \u0627\u0644\u0627\u0633\u062a\u0645\u0627\u0631\u0629';
   }
 }
 
@@ -760,7 +760,7 @@ function resetForm() {
   document.getElementById('eng-type').value = '';
   document.getElementById('eng-score').value = '';
   document.getElementById('submit-btn').disabled = false;
-  document.getElementById('btn-text').textContent = 'إرسال الاستمارة';
+  document.getElementById('btn-text').textContent = '\u0625\u0631\u0633\u0627\u0644 \u0627\u0644\u0627\u0633\u062a\u0645\u0627\u0631\u0629';
   progress.style.width = '0%';
 }
 </script>
