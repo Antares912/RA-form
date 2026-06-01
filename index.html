@@ -3,30 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>استمارة مقارنة النسب — مساعد باحث</title>
+<title>استمارة مقارنة النسب - مساعد باحث</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F7F5F0;
+    /* Updated clean, relaxing aesthetic */
+    --bg: #F8F9FA;
     --surface: #FFFFFF;
-    --surface2: #F0EDE6;
-    --border: #DDD9D0;
-    --border-focus: #2C5F2E;
-    --accent: #2C5F2E;
-    --accent-light: #EAF2EA;
-    --accent2: #C8A84B;
-    --text: #1A1A1A;
-    --text-muted: #6B6560;
-    --text-light: #9B9590;
-    --danger: #C0392B;
-    --danger-light: #FDF2F2;
-    --success: #2C5F2E;
-    --success-light: #EAF2EA;
+    --surface2: #F1F3F5;
+    --border: #DEE2E6;
+    --border-focus: #5B7486; /* Calming slate blue */
+    --accent: #5B7486;
+    --accent-light: #F0F4F7;
+    --accent2: #A58D47;
+    --text: #2C3E50;
+    --text-muted: #7F8C8D;
+    --text-light: #BDC3C7;
+    --danger: #D96A6A;
+    --danger-light: #FDF4F4;
+    --success: #6B8F71;
+    --success-light: #F1F6F2;
     --radius: 10px;
     --radius-sm: 6px;
-    --shadow: 0 2px 12px rgba(0,0,0,0.06);
-    --shadow-lg: 0 8px 32px rgba(0,0,0,0.1);
+    --shadow: 0 2px 12px rgba(0,0,0,0.04);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.08);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -65,14 +66,14 @@
   }
   .header-badge {
     display: inline-block;
-    background: rgba(200,168,75,0.2);
+    background: rgba(165,141,71,0.2);
     color: var(--accent2);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.08em;
     padding: 4px 12px;
     border-radius: 20px;
-    border: 1px solid rgba(200,168,75,0.3);
+    border: 1px solid rgba(165,141,71,0.3);
     margin-bottom: 10px;
   }
   .page-header h1 {
@@ -86,7 +87,7 @@
   }
   .page-header p {
     font-size: 13px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255,255,255,0.8);
     position: relative;
     z-index: 1;
   }
@@ -95,7 +96,7 @@
     align-items: center;
     gap: 6px;
     background: rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.85);
+    color: rgba(255,255,255,0.9);
     font-size: 12px;
     padding: 5px 12px;
     border-radius: 20px;
@@ -103,10 +104,26 @@
   }
   .anon-dot {
     width: 6px; height: 6px;
-    background: #7EC880;
+    background: #8FCB91;
     border-radius: 50%;
     display: inline-block;
   }
+  .view-results-btn {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    transition: background 0.2s, transform 0.1s;
+    position: relative;
+    z-index: 1;
+  }
+  .view-results-btn:hover { background: rgba(255, 255, 255, 0.25); }
+  .view-results-btn:active { transform: scale(0.98); }
 
   /* Layout */
   .page-body {
@@ -199,14 +216,14 @@
     -webkit-appearance: none;
   }
   select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6560' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%237F8C8D' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: left 12px center;
     padding-left: 32px;
   }
   select:focus, input:focus {
     border-color: var(--border-focus);
-    box-shadow: 0 0 0 3px rgba(44,95,46,0.1);
+    box-shadow: 0 0 0 3px rgba(91,116,134,0.15);
   }
 
   /* Checkboxes */
@@ -310,7 +327,7 @@
   /* Error */
   .error-box {
     background: var(--danger-light);
-    border: 1px solid rgba(192,57,43,0.2);
+    border: 1px solid rgba(217,106,106,0.2);
     border-radius: var(--radius-sm);
     padding: 10px 14px;
     font-size: 13px;
@@ -330,6 +347,7 @@
     display: flex; align-items: center; justify-content: center;
     margin: 0 auto 1.25rem;
     font-size: 28px;
+    color: var(--success);
   }
   .success-screen h2 {
     font-family: 'Tajawal', sans-serif;
@@ -398,6 +416,12 @@
     <span class="anon-dot"></span>
     نموذج مجهول — لا تُجمع أي بيانات شخصية
   </div>
+  
+  <div style="margin-top: 15px;">
+    <a id="header-results-link" class="view-results-btn" href="#" target="_blank" rel="noopener">
+      عرض النتائج المجمعة
+    </a>
+  </div>
 </header>
 
 <div class="page-body">
@@ -405,7 +429,6 @@
 
   <div id="form-view">
 
-    <!-- Section 1: Field & Speciality -->
     <div class="section-card">
       <div class="section-header">
         <div class="section-num">١</div>
@@ -427,7 +450,6 @@
       </div>
     </div>
 
-    <!-- Section 2: Centre -->
     <div class="section-card hidden" id="centre-card">
       <div class="section-header">
         <div class="section-num">٢</div>
@@ -442,7 +464,6 @@
       </div>
     </div>
 
-    <!-- Section 3: Scores -->
     <div class="section-card">
       <div class="section-header">
         <div class="section-num">٣</div>
@@ -454,7 +475,6 @@
       </div>
     </div>
 
-    <!-- Section 4: English (optional) -->
     <div class="section-card">
       <div class="section-header">
         <div class="section-num">٤</div>
@@ -486,10 +506,7 @@
       </button>
     </div>
 
-  </div><!-- /form-view -->
-
-  <!-- Success screen -->
-  <div id="success-view" class="success-screen hidden">
+  </div><div id="success-view" class="success-screen hidden">
     <div class="success-icon">✓</div>
     <h2>تم الإرسال بنجاح</h2>
     <p>شكراً لمساهمتك.<br>سيتم إضافة بياناتك إلى جدول المقارنة.</p>
@@ -499,11 +516,9 @@
     </div>
   </div>
 
-</div><!-- /page-body -->
-
-<script>
+</div><script>
 // =========================================================
-// CONFIG \u2014 replace with your deployed Apps Script URL
+// CONFIG
 // =========================================================
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfznanCRYre48vxAgsNc83QxVlvjx7qSYpdB3nK6lLH2b79P1cA6DnuEp7V-clDJyS3Q/exec';
 const RESULTS_URL = 'https://docs.google.com/spreadsheets/d/1ghm4KY6xYxxt9VRvcxO5Yq0DM0XkN8b1JXv_q-zwR4s/edit?usp=sharing';
@@ -648,6 +663,8 @@ const centreCard = document.getElementById('centre-card');
 const centreSel = document.getElementById('centre-select');
 const progress = document.getElementById('progress');
 
+setupResultsLink();
+
 FIELDS.forEach(f => {
   const o = document.createElement('option');
   o.value = f; o.textContent = f;
@@ -660,7 +677,7 @@ function onFieldChange() {
   const field = fieldSel.value;
   specBoxes.innerHTML = '';
   centreCard.classList.add('hidden');
-  centreSel.innerHTML = '<option value="">\u2014 \u0627\u062e\u062a\u0631 \u0627\u0644\u0645\u0631\u0643\u0632 \u2014</option>';
+  centreSel.innerHTML = '<option value="">— اختر المركز —</option>';
   specCount.classList.add('hidden');
 
   if (!field) { specGroup.classList.add('hidden'); updateProgress(); return; }
@@ -682,7 +699,7 @@ function onFieldChange() {
 function updateCentres() {
   const checked = [...specBoxes.querySelectorAll('input:checked')].map(cb => parseInt(cb.value));
   const n = checked.length;
-  specCount.textContent = n > 0 ? `\u062a\u0645 \u0627\u062e\u062a\u064a\u0627\u0631 ${n} \u062a\u062e\u0635\u0635` : '';
+  specCount.textContent = n > 0 ? `تم اختيار ${n} تخصص` : '';
   n > 0 ? specCount.classList.remove('hidden') : specCount.classList.add('hidden');
 
   if (n === 0) { centreCard.classList.add('hidden'); updateProgress(); return; }
@@ -693,7 +710,7 @@ function updateCentres() {
     if (s) s.centres.forEach(ci => centreIds.add(ci));
   });
 
-  centreSel.innerHTML = '<option value="">\u2014 \u0627\u062e\u062a\u0631 \u0627\u0644\u0645\u0631\u0643\u0632 \u2014</option>';
+  centreSel.innerHTML = '<option value="">— اختر المركز —</option>';
   [...centreIds].sort((a,b)=>a-b).forEach(ci => {
     const o = document.createElement('option');
     o.value = ci; o.textContent = CENTRES[ci];
@@ -732,10 +749,10 @@ async function submitForm() {
   const engType = document.getElementById('eng-type').value;
   const engScore = document.getElementById('eng-score').value;
 
-  if (!field) { showError('\u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u0627\u0644\u0643\u0644\u064a\u0629 / \u0627\u0644\u0645\u062c\u0645\u0648\u0639\u0629'); return; }
-  if (selectedSpecs.length === 0) { showError('\u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u062a\u062e\u0635\u0635 \u0648\u0627\u062d\u062f \u0639\u0644\u0649 \u0627\u0644\u0623\u0642\u0644'); return; }
-  if (!centre) { showError('\u064a\u0631\u062c\u0649 \u0627\u062e\u062a\u064a\u0627\u0631 \u0627\u0644\u0645\u0631\u0643\u0632 \u0627\u0644\u0628\u062d\u062b\u064a'); return; }
-  if (!pct || parseFloat(pct) < 0 || parseFloat(pct) > 100) { showError('\u064a\u0631\u062c\u0649 \u0625\u062f\u062e\u0627\u0644 \u0627\u0644\u0646\u0633\u0628\u0629 \u0627\u0644\u0645\u0626\u0648\u064a\u0629 \u0627\u0644\u0625\u062c\u0645\u0627\u0644\u064a\u0629 \u0628\u0634\u0643\u0644 \u0635\u062d\u064a\u062d (0-100)'); return; }
+  if (!field) { showError('يرجى اختيار الكلية / المجموعة'); return; }
+  if (selectedSpecs.length === 0) { showError('يرجى اختيار تخصص واحد على الأقل'); return; }
+  if (!centre) { showError('يرجى اختيار المركز البحثي'); return; }
+  if (!pct || parseFloat(pct) < 0 || parseFloat(pct) > 100) { showError('يرجى إدخال النسبة المئوية الإجمالية بشكل صحيح (0-100)'); return; }
 
   const payload = {
     field,
@@ -749,7 +766,7 @@ async function submitForm() {
   const btn = document.getElementById('submit-btn');
   const btnText = document.getElementById('btn-text');
   btn.disabled = true;
-  btnText.innerHTML = '<span class="spinner"></span> \u062c\u0627\u0631\u064a \u0627\u0644\u0625\u0631\u0633\u0627\u0644...';
+  btnText.innerHTML = '<span class="spinner"></span> جاري الإرسال...';
 
   try {
     await fetch(SCRIPT_URL, {
@@ -760,12 +777,11 @@ async function submitForm() {
     });
     document.getElementById('form-view').classList.add('hidden');
     document.getElementById('success-view').classList.remove('hidden');
-    setupResultsLink();
     progress.style.width = '100%';
   } catch (e) {
-    showError('\u062d\u062f\u062b \u062e\u0637\u0623 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u0625\u0631\u0633\u0627\u0644. \u064a\u0631\u062c\u0649 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629 \u0645\u0631\u0629 \u0623\u062e\u0631\u0649.');
+    showError('حدث خطأ أثناء الإرسال. يرجى المحاولة مرة أخرى.');
     btn.disabled = false;
-    btnText.textContent = '\u0625\u0631\u0633\u0627\u0644 \u0627\u0644\u0627\u0633\u062a\u0645\u0627\u0631\u0629';
+    btnText.textContent = 'إرسال الاستمارة';
   }
 }
 
@@ -777,22 +793,28 @@ function showError(msg) {
 }
 
 function setupResultsLink() {
-  const link = document.getElementById('results-link');
-  if (!link) return;
+  const links = [
+    document.getElementById('results-link'),
+    document.getElementById('header-results-link')
+  ];
 
-  if (!RESULTS_URL || RESULTS_URL === 'PASTE_PUBLIC_RESULTS_SHEET_URL_HERE') {
-    link.removeAttribute('target');
-    link.onclick = function(e) {
-      e.preventDefault();
-      alert('\u064a\u062c\u0628 \u0625\u0636\u0627\u0641\u0629 \u0631\u0627\u0628\u0637 \u062c\u062f\u0648\u0644 \u0627\u0644\u0646\u062a\u0627\u0626\u062c \u0627\u0644\u0639\u0627\u0645 \u0623\u0648\u0644\u0627\u064b.');
-    };
-    return;
-  }
+  links.forEach(link => {
+    if (!link) return;
 
-  link.href = RESULTS_URL;
-  link.target = '_blank';
-  link.rel = 'noopener';
-  link.onclick = null;
+    if (!RESULTS_URL || RESULTS_URL === 'PASTE_PUBLIC_RESULTS_SHEET_URL_HERE') {
+      link.removeAttribute('target');
+      link.href = '#';
+      link.onclick = function(e) {
+        e.preventDefault();
+        alert('يجب إضافة رابط جدول النتائج العام أولاً.');
+      };
+    } else {
+      link.href = RESULTS_URL;
+      link.target = '_blank';
+      link.rel = 'noopener';
+      link.onclick = null;
+    }
+  });
 }
 
 function resetForm() {
@@ -805,7 +827,7 @@ function resetForm() {
   document.getElementById('eng-type').value = '';
   document.getElementById('eng-score').value = '';
   document.getElementById('submit-btn').disabled = false;
-  document.getElementById('btn-text').textContent = '\u0625\u0631\u0633\u0627\u0644 \u0627\u0644\u0627\u0633\u062a\u0645\u0627\u0631\u0629';
+  document.getElementById('btn-text').textContent = 'إرسال الاستمارة';
   progress.style.width = '0%';
 }
 </script>
