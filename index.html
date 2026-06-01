@@ -358,6 +358,28 @@
     transition: background 0.15s;
   }
   .submit-another:hover { background: var(--accent-light); }
+  .success-actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 1.5rem;
+  }
+  .results-link {
+    display: inline-block;
+    padding: 10px 24px;
+    background: var(--accent);
+    color: #fff;
+    border: 1.5px solid var(--accent);
+    border-radius: var(--radius-sm);
+    font-family: 'Cairo', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+  .results-link:hover { opacity: 0.9; }
 
   /* Responsive */
   @media (max-width: 480px) {
@@ -471,7 +493,10 @@
     <div class="success-icon">✓</div>
     <h2>تم الإرسال بنجاح</h2>
     <p>شكراً لمساهمتك.<br>سيتم إضافة بياناتك إلى جدول المقارنة.</p>
-    <button class="submit-another" onclick="resetForm()">إرسال استمارة أخرى</button>
+    <div class="success-actions">
+      <a class="results-link" id="results-link" href="#" target="_blank" rel="noopener">عرض النتائج</a>
+      <button class="submit-another" onclick="resetForm()">إرسال استمارة أخرى</button>
+    </div>
   </div>
 
 </div><!-- /page-body -->
@@ -480,7 +505,8 @@
 // =========================================================
 // CONFIG \u2014 replace with your deployed Apps Script URL
 // =========================================================
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwO6jUB_mfLnMuuJKABWy_Ll33ddG6Fwi-Zx6ik4_hv_6Cu2qFxl_MIrfuIEEDErkHPKw/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfznanCRYre48vxAgsNc83QxVlvjx7qSYpdB3nK6lLH2b79P1cA6DnuEp7V-clDJyS3Q/exec';
+const RESULTS_URL = 'https://docs.google.com/spreadsheets/d/1ghm4KY6xYxxt9VRvcxO5Yq0DM0XkN8b1JXv_q-zwR4s/edit?usp=sharing';
 
 // =========================================================
 // DATA
@@ -717,8 +743,7 @@ async function submitForm() {
     centre,
     overallPct: parseFloat(pct),
     engType: engType || '',
-    engScore: engScore || '',
-    timestamp: new Date().toISOString()
+    engScore: engScore || ''
   };
 
   const btn = document.getElementById('submit-btn');
@@ -735,6 +760,7 @@ async function submitForm() {
     });
     document.getElementById('form-view').classList.add('hidden');
     document.getElementById('success-view').classList.remove('hidden');
+    setupResultsLink();
     progress.style.width = '100%';
   } catch (e) {
     showError('\u062d\u062f\u062b \u062e\u0637\u0623 \u0623\u062b\u0646\u0627\u0621 \u0627\u0644\u0625\u0631\u0633\u0627\u0644. \u064a\u0631\u062c\u0649 \u0627\u0644\u0645\u062d\u0627\u0648\u0644\u0629 \u0645\u0631\u0629 \u0623\u062e\u0631\u0649.');
@@ -748,6 +774,25 @@ function showError(msg) {
   b.textContent = msg;
   b.classList.remove('hidden');
   b.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function setupResultsLink() {
+  const link = document.getElementById('results-link');
+  if (!link) return;
+
+  if (!RESULTS_URL || RESULTS_URL === 'PASTE_PUBLIC_RESULTS_SHEET_URL_HERE') {
+    link.removeAttribute('target');
+    link.onclick = function(e) {
+      e.preventDefault();
+      alert('\u064a\u062c\u0628 \u0625\u0636\u0627\u0641\u0629 \u0631\u0627\u0628\u0637 \u062c\u062f\u0648\u0644 \u0627\u0644\u0646\u062a\u0627\u0626\u062c \u0627\u0644\u0639\u0627\u0645 \u0623\u0648\u0644\u0627\u064b.');
+    };
+    return;
+  }
+
+  link.href = RESULTS_URL;
+  link.target = '_blank';
+  link.rel = 'noopener';
+  link.onclick = null;
 }
 
 function resetForm() {
